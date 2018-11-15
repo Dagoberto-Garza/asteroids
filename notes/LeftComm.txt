@@ -1,0 +1,21 @@
+package com.mygdx.game;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
+
+public class LeftComm extends Command {
+    public LeftComm() {
+    }
+
+    @Override
+    public void exu() {
+
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            MyGdxGame.getCircle(0).getPos().add(-1,0);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.J)){
+            MyGdxGame.getCircle(1).getPos().add(-1,0);
+        }
+    }
+}

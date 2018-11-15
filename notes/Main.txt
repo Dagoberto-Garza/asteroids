@@ -1,0 +1,44 @@
+package com.mygdx.game;
+
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.shapes.Circle;
+import com.mygdx.game.shapes.ShapeRendererExt;
+
+public class Main extends ApplicationAdapter {
+
+
+	SpriteBatch batch ;
+	Board board;
+	GameStateManager gameStateManager;
+	public static int WIDTH =700;
+	public static int HEIGHT =600;
+
+	@Override
+	public void create () {
+		Gdx.graphics.setTitle("Connect4");
+		Gdx.graphics.setWindowedMode(700,600);
+		gameStateManager=new GameStateManager();
+		gameStateManager.push(new GameState());
+
+		batch=new SpriteBatch();
+
+
+	}
+
+	@Override
+	public void render () {
+
+		gameStateManager.update(Gdx.graphics.getDeltaTime());
+		gameStateManager.render(batch);
+	}
+	
+	@Override
+	public void dispose () {
+
+	}
+}

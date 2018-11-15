@@ -1,0 +1,71 @@
+package com.mygdx.game;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.shapes.ShapeRendererExt;
+import com.mygdx.game.shapes.Triangle;
+
+import static com.mygdx.game.Main.HEIGHT;
+import static com.mygdx.game.Main.WIDTH;
+
+public class Board {
+    int n = 7;
+    int m = 6;
+    private int[][] board = new int[n][m];
+
+    public Board() {
+
+    }
+
+
+    public void display(ShapeRendererExt shape) {
+
+        Color color = new Color(1, 1, 1, 1);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                float r = 50,
+                        x = (Gdx.graphics.getWidth() / n) * i,
+                        y = (Gdx.graphics.getHeight() / m) * j;
+
+                if (board[i][j] == 0) {
+                    color = new Color(1, 1, 1, 1);
+                    shape.setColor(color);
+                    shape.set(ShapeRenderer.ShapeType.Filled);
+                    shape.circle((r) + x, (r) + y, r);
+                }
+                if (board[i][j] == 2) {
+                    color = new Color(0, 0, 1, 1);
+                    shape.setColor(color);
+                    shape.set(ShapeRenderer.ShapeType.Filled);
+                    shape.circle((r) + x, (r) + y, r);
+                }
+                if (board[i][j] == 1) {
+                    color = new Color(1, 0, 0, 1);
+                    shape.setColor(color);
+                    shape.set(ShapeRenderer.ShapeType.Filled);
+                    shape.circle((r) + x, (r) + y, r);
+                }
+                //sets lines in place. uses rectangles;
+                shape.set(ShapeRenderer.ShapeType.Line);
+                shape.setColor(0, 1, .5f, 1);
+                shape.rect((WIDTH / n) * i, (HEIGHT / m) * j, WIDTH / n, HEIGHT / m);
+            }
+        }
+    }
+
+    public void place(int mx, int player) {
+        int x=(int)Math.floor(mx/((float) WIDTH/(float)n));
+        boolean end=true;
+        for(int y=0; y<m && end ;y++){
+            if(board[x][y]==0) {
+                board[x][y] = player;
+                end=false;
+            }
+        }
+    }
+
+
+
+}
